@@ -1,0 +1,261 @@
+@import '~bootstrap/scss/bootstrap';
+
+@mixin make_color($color) {
+    background-color: $color;
+}
+
+$label-color: #ffc2d1;
+$header-color: #e9d8a6;
+$button-color: #ffddd2;
+$main-color: #caf0f8;
+$font-color: #5f0f40;
+
+$primary: #5f0f40;
+$info: #ffc2d1;
+$warning: red;
+
+$grid-breakpoints: (
+    xs: 0,
+    sm: 576px,
+    md: 768px,
+    lg: 992px,
+    xl: 1200px,
+    xxl: 1400px,
+    xxxl: 2400px
+);
+
+$container-max-widths: (
+    sm: 540px,
+    md: 720px,
+    lg: 960px,
+    xl: 1140px,
+    xxl: 1320px,
+    xxxl: 1800px
+);
+
+@import "~bootstrap/scss/bootstrap";
+
+body {
+    background-color: $main-color;
+    color: $font-color;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+
+    .navbar-custom {
+        @include make_color($header-color);
+        border-bottom: 2px solid darken($header-color, 10%);
+
+        .navbar-brand {
+            font-weight: bold;
+            color: $font-color;
+
+            img {
+                height: 50px;
+                width: 50px;
+                margin-right: 10px;
+            }
+        }
+
+        .btn-custom {
+            @include make_color($button-color);
+            border-color: $button-color;
+            color: $font-color;
+            font-weight: bold;
+
+            &:hover {
+                background-color: darken($button-color, 10%);
+                border-color: darken($button-color, 10%);
+            }
+        }
+    }
+
+    .character-image {
+        height: 250px;
+
+    }
+
+    .modal-character-image {
+        height: 300px;
+        width: 100%;
+        object-fit: cover;
+        /* Это самое важное! */
+        border-radius: 10px;
+    }
+
+    // Для страницы show.blade.php
+    .character-detail-image {
+        height: 400px;
+        width: 100%;
+        object-fit: cover;
+        border-radius: 10px;
+        margin-bottom: 20px;
+    }
+
+    // Для карточек на главной
+    .card-img-top.character-image {
+        height: 250px;
+        width: 100%;
+        object-fit: cover;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+    }
+
+    .character-label {
+        @include make_color($label-color);
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        padding: 5px 15px;
+        border-radius: 20px;
+        font-size: 14px;
+        font-weight: bold;
+        color: $font-color;
+        z-index: 10;
+    }
+
+    .character-card {
+        cursor: pointer;
+
+        &:hover {
+            transform: translateY(-5px);
+        }
+
+        @for $i from 1 through 5 {
+            &.card-custom-#{$i} {
+                $hue: 15 * $i + 100;
+                $card-color: hsl($hue, 40%, 70%);
+                @include make_color($card-color);
+            }
+        }
+    }
+
+    .footer-custom {
+        @include make_color($header-color);
+        border-top: 2px solid darken($header-color, 10%);
+        margin-top: auto;
+
+        .social-links {
+            img {
+                width: 40px;
+                height: 40px;
+                transition: transform 0.3s ease;
+
+                &:hover {
+                    transform: scale(1.2);
+                }
+            }
+        }
+    }
+
+    .popover-text {
+        border-bottom: 2px $primary;
+        color: darken($primary, 10%);
+        font-weight: 600;
+        background-color: lighten($primary, 45%);
+        padding: 1px 3px;
+        border-radius: 3px;
+
+        &:hover {
+            color: darken($primary, 20%);
+            background-color: lighten($primary, 35%);
+            border-bottom: 2px darken($primary, 20%);
+        }
+    }
+
+    .popover {
+        border: 2px solid $info;
+
+        .popover-header {
+            @include make_color($info);
+            color: $font-color;
+            font-weight: bold;
+        }
+    }
+
+    .toast {
+        .toast-header {
+            @include make_color(lighten($warning, 15%));
+        }
+
+        .fa-cog {
+            color: $warning;
+        }
+    }
+
+    .modal-content {
+        .modal-header {
+            @include make_color($header-color);
+            border-bottom: 2px solid darken($header-color, 10%);
+
+            .modal-title {
+                color: $font-color;
+                font-weight: bold;
+            }
+        }
+
+        .modal-footer {
+            .btn-outline-secondary {
+                border-color: $primary;
+                color: $primary;
+
+                &:hover {
+                    background-color: $primary;
+                    color: white;
+                }
+            }
+        }
+
+        .modal-character-image {
+            height: 300px;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .character-label {
+            font-size: 12px;
+            padding: 3px 10px;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .navbar-custom {
+            .navbar-brand {
+                span {
+                    font-size: 0.8rem;
+                    max-width: 150px;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+
+                img {
+                    height: 30px;
+                    width: 30px;
+                    margin-right: 5px;
+                }
+            }
+
+            .btn-custom {
+                font-size: 0.75rem;
+                padding: 0.2rem 0.4rem;
+            }
+        }
+
+        .container-fluid {
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+
+        .footer-custom {
+            .d-flex {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .social-links {
+                justify-content: center;
+            }
+        }
+    }
+}
