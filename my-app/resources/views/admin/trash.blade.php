@@ -68,9 +68,6 @@
     
     <div class="mt-4">
         <a href="{{ url('/') }}" class="btn btn-secondary">На главную</a>
-        @if(auth()->user()->is_admin)
-            <a href="/" class="btn btn-primary">В админ-панель</a>
-        @endif
     </div>
 </div>
 @endsection

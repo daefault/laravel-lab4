@@ -9,15 +9,13 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Comment extends Model
 {
     use HasFactory, SoftDeletes;
-
-    protected $fillable = [
+        protected $fillable = [
         'content',
         'user_id',
         'character_id',
     ];
 
     protected $dates = ['deleted_at'];
-
     public function user()
     {
         return $this->belongsTo(User::class);

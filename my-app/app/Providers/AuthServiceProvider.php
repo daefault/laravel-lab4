@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Gate;
 use App\Models\User;
 use App\Models\Character;
 use App\Models\Comment;
+use Laravel\Passport\Passport; 
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -25,7 +26,6 @@ class AuthServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->registerPolicies();
-
         Gate::define('update-character', function (User $user, Character $character) {
             return $user->id === $character->user_id || $user->is_admin;
         });
@@ -68,5 +68,6 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('force-delete-comment', function (User $user) {
             return $user->is_admin;
         });
+        
     }
 }

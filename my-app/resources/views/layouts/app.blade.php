@@ -39,10 +39,13 @@
                             <li><a class="dropdown-item" href="{{ route('friends.index') }}">Мои друзья</a></li>
                             <li><a class="dropdown-item" href="{{ route('friends.requests') }}">Запросы</a></li>
                             <li><a class="dropdown-item" href="{{ route('friends.feed') }}">Лента</a></li>
+
                         </ul>
                     </li>
+                    <a href="{{ route('users.index') }}" class="btn btn-custom me-2">Все пользователи</a>
                     <a href="{{ route('characters.my') }}" class="btn btn-custom me-2">Мои персонажи</a>
                     <a href="{{ route('characters.create') }}" class="btn btn-custom me-2">Добавить</a>
+                    <a href="{{ route('tokens.index') }}" class="btn btn-custom me-2">API Токены</a>
 
                     @if(auth()->user()->is_admin)
                         <a href="{{ route('admin.trash') }}" class="btn btn-danger me-2">Корзина</a>
