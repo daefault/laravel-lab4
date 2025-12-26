@@ -29,16 +29,20 @@ Route::get('/dashboard', function () {
 Route::middleware(['auth'])->group(function () {
     Route::get('/users/{user}/characters', function ($identifier) {
         $user = \App\Models\User::where('username', $identifier)->first();
-
-        if (!$user) {
+                if (!$user) {
             $user = \App\Models\User::find($identifier);
         }
 
         if (!$user) {
             abort(404, 'Пользователь не найден');
         }
+        if (auth()->check() && auth()->user()->is_admin) {
+        $characters = $user->characters()->withTrashed()->get();
+    } else {
+        $characters = $user->characters()->get(); 
+    }
 
-        $characters = $user->characters()->get();
+
         return view('users.characters', [
             'user' => $user,
             'characters' => $characters
